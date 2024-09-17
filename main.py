@@ -59,7 +59,7 @@ class TRA:
             if self.G[self.currPos][i]:
                 stack.append(i)
                 add_to_stack += self.ret_city(i) + "\t"
-        add_to_stack += "top=>]"
+        add_to_stack += "Top of the stack:]"
         print(add_to_stack)
         self.currPos = stack[-1]
         self.traverse()
