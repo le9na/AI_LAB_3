@@ -1,9 +1,9 @@
 class TRA:
-    def __init__(self, size, loc):
+    def __init__(self, size, location):
         self.N = size
-        self.currPos = loc
+        self.currPos = location
         self.setup_graph()
-        print("----------Traverse-------------")
+        print("+-------------------------------+")
         print()
 
     def setup_graph(self):
@@ -24,14 +24,16 @@ class TRA:
     def traverse(self):
         print(f"The current city is: {self.ret_city(self.currPos)}\n")
         connected = [i for i in range(self.N) if self.G[self.currPos][i]]
+        print("The connected cities are:\n")
         for i, city in enumerate(connected):
-            print(f"[{i}] {self.ret_city(city)}\t")
+            print(f"{self.ret_city(city)}")
         print()
         print("Choose moving method:\n1. FIFO\n2. LIFO\n-1. Stop")
 
         num = int(input())
         if num == -1:
             print("Stopping program")
+            print("+-------------------------------+")
             return
         elif num == 1:
             self.fifo_traverse()
@@ -45,8 +47,8 @@ class TRA:
         for i in range(self.N):
             if self.G[self.currPos][i]:
                 q.append(i)
-                add_to_q += self.ret_city(i) + "\t"
-        add_to_q += "]\n"
+                add_to_q += self.ret_city(i) + ", "
+        add_to_q += "\n"
         print(add_to_q)
         print(f"{self.ret_city(q[0])} is destination\n")
         self.currPos = q[0]
@@ -54,12 +56,11 @@ class TRA:
 
     def lifo_traverse(self):
         stack = []
-        add_to_stack = "["
+        add_to_stack = ""
         for i in range(self.N):
             if self.G[self.currPos][i]:
                 stack.append(i)
-                add_to_stack += self.ret_city(i) + "\t"
-        add_to_stack += "Top of the stack:]"
+                add_to_stack += self.ret_city(i) + ", "
         print(add_to_stack)
         self.currPos = stack[-1]
         self.traverse()
